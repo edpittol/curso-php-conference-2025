@@ -1,0 +1,48 @@
+{
+    "name": "edpittol/curso-php-conference-2025",
+    "description": "Desenvolvendo conhecimento em programação PHP para WordPress.",
+    "version": "1.0.0",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Eduardo Pittol",
+            "email": "pittol@aztecweb.net"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        }
+    ],
+    "require-dev": {
+        "roots/wordpress-core-installer": "*",
+        "roots/wordpress-no-content": "*",
+        "wp-cli/wp-cli-bundle": "*"
+    },
+    "extra": {
+        "wordpress-install-dir": "public/wp",
+        "installer-paths": {
+            "public/packages/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "public/packages/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "roots/wordpress-core-installer": true
+        },
+        "platform": {
+            "php": "8.4"
+        },
+        "sort-packages": true
+    }
+}

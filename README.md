@@ -3,7 +3,9 @@
 ## Instalação
 
 ```bash
+mkdir -p ~/.docker_cache/{wp-cli,composer}
 docker compose build
+docker compose run --rm -u $(id -u):$(id -g) php composer install
 ```
 
 ## Execução
@@ -17,8 +19,6 @@ docker compose up -d server
 Servidor rodando com PHP.
 
 ```bash
-$ curl -Is http://localhost | grep -E '(HTTP|nginx|PHP)'
-HTTP/1.1 200 OK
-Server: nginx/1.28.0
-X-Powered-By: PHP/8.4.15
+$ curl -Is http://localhost | grep -E '(Location)'
+Location: http://localhost/wp/wp-admin/setup-config.php
 ```

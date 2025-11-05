@@ -17,6 +17,7 @@ services:
       target: php
     volumes:
       - ~/.docker_cache/composer:/.composer/cache/
+      - ~/.docker_cache/wp-cli:/.wp-cli/cache/
 
   fpm:
     extends:

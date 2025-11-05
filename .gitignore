@@ -1,2 +1,6 @@
 # Composer
 vendor/
+
+# WordPress
+/public/packages/
+/public/wp
