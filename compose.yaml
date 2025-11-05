@@ -1,0 +1,37 @@
+services:
+  base:
+    build:
+      dockerfile: ./Dockerfile
+      target: base
+      args:
+        PHP_VERSION: 8.4
+    environment:
+      PHP_VERSION: 8.4
+    volumes:
+      - .:/app
+
+  php:
+    extends:
+      service: base
+    build:
+      target: php
+    volumes:
+      - ~/.docker_cache/composer:/.composer/cache/
+
+  fpm:
+    extends:
+      service: base
+    build:
+      target: fpm
+
+  server:
+    extends:
+      service: fpm
+    build:
+      target: server
+    ports:
+      - "80:80"
+    volumes:
+      - ./resources/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - fpm
