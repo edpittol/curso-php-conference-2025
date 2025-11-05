@@ -22,7 +22,8 @@
     "require-dev": {
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
-        "wp-cli/wp-cli-bundle": "*"
+        "wp-cli/wp-cli-bundle": "*",
+        "wpackagist-theme/storefront": "*"
     },
     "extra": {
         "wordpress-install-dir": "public/wp",

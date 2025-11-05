@@ -7,6 +7,8 @@ FROM wordpress:cli-php${PHP_VERSION} AS php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+COPY bin/install.sh /usr/local/bin/
+
 VOLUME [ "/app" ]
 WORKDIR /app
 

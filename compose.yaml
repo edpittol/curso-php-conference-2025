@@ -6,6 +6,11 @@ services:
       args:
         PHP_VERSION: 8.4
     environment:
+      HOME_URL: http://localhost
+      MYSQL_HOST: ${MYSQL_HOST:-db}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-project}
+      MYSQL_USER: ${MYSQL_USER:-project}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-project}
       PHP_VERSION: 8.4
     volumes:
       - .:/app
@@ -24,6 +29,8 @@ services:
       service: base
     build:
       target: fpm
+    depends_on:
+      - db
 
   server:
     extends:
@@ -36,3 +43,19 @@ services:
       - ./resources/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - fpm
+
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+      MYSQL_HOST: ${MYSQL_HOST:-db}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-project}
+      MYSQL_USER: ${MYSQL_USER:-project}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-project}
+    ports:
+      - "3306"
+
+  installer:
+    extends:
+      service: php
+    entrypoint: [ "install.sh" ]
