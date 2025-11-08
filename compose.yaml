@@ -14,6 +14,7 @@ services:
       PHP_VERSION: 8.4
     volumes:
       - .:/app
+      - ./plugin:/app/public/packages/plugins/curso-php-conference-2025
 
   php:
     extends:

@@ -3,7 +3,7 @@
 ## Instalação
 
 ```bash
-mkdir -p ~/.docker_cache/{wp-cli,composer}
+mkdir -p ~/.docker_cache/{wp-cli,composer} public/packages/plugins/curso-php-conference-2025
 docker compose build
 docker compose run --rm -u $(id -u):$(id -g) php composer install
 docker compose run --rm -u $(id -u):$(id -g) installer
@@ -20,6 +20,10 @@ docker compose up -d server
 Servidor rodando com PHP.
 
 ```bash
-$ curl -Is http://localhost | grep -E '(Link)'
-Link: <http://localhost/wp-json/>; rel="https://api.w.org/"
+$ docker compose run --rm -u $(id -u):$(id -g) php wp plugin list
++---------------------------+--------+--------+---------+----------------+-------------+
+| name                      | status | update | version | update_version | auto_update |
++---------------------------+--------+--------+---------+----------------+-------------+
+| curso-php-conference-2025 | active | none   | 1.0.0   |                | off         |
++---------------------------+--------+--------+---------+----------------+-------------+
 ```
