@@ -20,6 +20,7 @@
         }
     ],
     "require-dev": {
+        "lucatume/wp-browser": "^4.5",
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
         "wp-cli/wp-cli-bundle": "*",

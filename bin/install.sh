@@ -1,10 +1,15 @@
 #!/bin/bash
 
-set -e
+set -ex
 
-while ! mariadb-admin ping -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} --silent; do
-echo 'Waiting database connection' && sleep 3
-done
+# Aguarda conexão com banco de dados quando serviço de banco de dados é MySQL
+if [ "1" == ${IS_TESTING:-0} ]; then
+  vendor/bin/codecept dev:start
+else
+  while ! mariadb-admin ping -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} --silent; do
+    echo 'Waiting database connection' && sleep 3
+  done
+fi
 
 # Instala WordPress
 if ! wp core is-installed; then
@@ -29,3 +34,7 @@ wp language theme install pt_BR --all
 
 # Atualiza banco de dados para última versão de pacotes
 wp core update-db
+
+if [ "1" == ${IS_TESTING:-0} ]; then
+  sqlite3 public/packages/database/.ht.sqlite .dump > tests/Support/Data/dump.sql
+fi

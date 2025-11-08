@@ -13,6 +13,26 @@ ENV BUILD_DEPS="gettext autoconf build-base gcc linux-headers"
 RUN set -ex && \
 	apk add --update $BUILD_DEPS
 
+FROM build-deps AS chromium
+
+ENV RUNTIME_DEPS="chromium chromium-chromedriver"
+
+RUN set -ex && \
+    apk add $RUNTIME_DEPS
+
+FROM build-deps AS procps
+
+ENV RUNTIME_DEPS="procps"
+
+RUN set -ex && \
+	apk add $RUNTIME_DEPS
+
+FROM build-deps AS sqlite3
+
+ENV RUNTIME_DEPS="sqlite"
+
+RUN set -ex && \
+	apk add $RUNTIME_DEPS
 
 FROM build-deps AS xdebug
 
@@ -31,7 +51,26 @@ RUN { \
 
 FROM wordpress:cli-php${PHP_VERSION} AS php
 
+COPY --from=chromium /etc/alsa/ /etc/alsa/
+COPY --from=chromium /etc/chromium/ /etc/chromium/
+COPY --from=chromium /etc/fonts/ /etc/fonts/
+COPY --from=chromium /etc/gtk-3.0/ /etc/gtk-3.0/
+COPY --from=chromium /etc/pkcs11/ /etc/pkcs11/
+COPY --from=chromium /etc/pulse/ /etc/pulse/
+COPY --from=chromium /etc/vdpau_wrapper.cfg /etc/vdpau_wrapper.cfg
+COPY --from=chromium /etc/xdg/ /etc/xdg/
+COPY --from=chromium /usr/bin/ /usr/bin/
+COPY --from=chromium /usr/lib/ /usr/lib/
+COPY --from=chromium /usr/share/ /usr/share/
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+COPY --from=procps /bin/ /bin/
+COPY --from=procps /sbin/ /sbin/
+COPY --from=procps /usr/bin/ /usr/bin/
+COPY --from=procps /usr/lib/ /usr/lib/
+
+COPY --from=sqlite3 /usr/bin/ /usr/bin/
 
 COPY --from=xdebug /usr/local/etc/php/ /usr/local/etc/php/
 COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/

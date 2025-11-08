@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-project}
       MYSQL_USER: ${MYSQL_USER:-project}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-project}
-      PHP_XDEBUG_MODE: ${PHP_XDEBUG_MODE:-off}
       PHP_VERSION: 8.4
+      PHP_XDEBUG_MODE: ${PHP_XDEBUG_MODE:-off}
     extra_hosts:
       - "host.docker.internal:${HOST_DOCKER_INTERNAL_IP:-172.17.0.1}"
     volumes:
@@ -27,6 +27,8 @@ services:
     volumes:
       - ~/.docker_cache/composer:/.composer/cache/
       - ~/.docker_cache/wp-cli:/.wp-cli/cache/
+      - ./.config/chromium:/.config/chromium
+      - ./tests/db.php:/app/public/packages/db.php
 
   fpm:
     extends:

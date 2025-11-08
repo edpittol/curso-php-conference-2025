@@ -3,7 +3,11 @@ vendor/
 
 # Projeto
 .env
+!tests/.env
 
 # WordPress
 /public/packages/
 /public/wp
+
+# WPBrowser
+/.config
