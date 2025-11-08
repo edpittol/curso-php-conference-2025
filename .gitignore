@@ -1,6 +1,9 @@
 # Composer
 vendor/
 
+# Projeto
+.env
+
 # WordPress
 /public/packages/
 /public/wp

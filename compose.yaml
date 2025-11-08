@@ -11,7 +11,10 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-project}
       MYSQL_USER: ${MYSQL_USER:-project}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-project}
+      PHP_XDEBUG_MODE: ${PHP_XDEBUG_MODE:-off}
       PHP_VERSION: 8.4
+    extra_hosts:
+      - "host.docker.internal:${HOST_DOCKER_INTERNAL_IP:-172.17.0.1}"
     volumes:
       - .:/app
       - ./plugin:/app/public/packages/plugins/curso-php-conference-2025
