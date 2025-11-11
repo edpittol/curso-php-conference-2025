@@ -1,0 +1,9 @@
+{
+  "_wc_pes_stripe": 0,
+  "_wc_pes_woopayments": 1,
+  "_wc_pes_paypal_full_stack": 2,
+  "_wc_offline_payment_methods_group": 3,
+  "bacs": 4,
+  "cheque": 5,
+  "cod": 6
+}

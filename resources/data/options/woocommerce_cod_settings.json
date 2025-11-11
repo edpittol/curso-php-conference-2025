@@ -1,0 +1,12 @@
+{
+    "enabled": "yes",
+    "title": "Pagamento na entrega",
+    "description": "Pagar em dinheiro na entrega.",
+    "instructions": "Pagar em dinheiro na entrega.",
+    "enable_for_methods": [
+        "flat_rate",
+        "free_shipping",
+        "pickup_location"
+    ],
+    "enable_for_virtual": "yes"
+}

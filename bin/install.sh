@@ -42,6 +42,10 @@ if [[ "0" == $(wp post list --post_type=product --format=count) ]]; then
   wp plugin deactivate wordpress-importer
 fi
 
+# Sobreescreve options definidas em resources/data/options/
+find resources/data/options/ -name "*.json" -exec bash -c 'cat {} | envsubst | wp option update $(basename {} .json) --format=json' \;
+find resources/data/options/ -name "*.txt" -exec bash -c 'cat {} | envsubst | tr -d "\n" | wp option update $(basename {} .txt)' \;
+
 if [ "1" == ${IS_TESTING:-0} ]; then
   sqlite3 public/packages/database/.ht.sqlite .dump > tests/Support/Data/dump.sql
 fi

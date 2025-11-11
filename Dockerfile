@@ -20,6 +20,13 @@ ENV RUNTIME_DEPS="chromium chromium-chromedriver"
 RUN set -ex && \
     apk add $RUNTIME_DEPS
 
+FROM build-deps AS envsubst
+
+ENV RUNTIME_DEPS="libintl"
+
+RUN set -ex && \
+    apk add --update $RUNTIME_DEPS
+
 FROM build-deps AS procps
 
 ENV RUNTIME_DEPS="procps"
@@ -65,6 +72,9 @@ COPY --from=chromium /usr/share/ /usr/share/
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+COPY --from=envsubst /usr/bin/envsubst /usr/bin/envsubst
+COPY --from=envsubst /usr/lib /usr/lib
+
 COPY --from=procps /bin/ /bin/
 COPY --from=procps /sbin/ /sbin/
 COPY --from=procps /usr/bin/ /usr/bin/
@@ -73,8 +83,8 @@ COPY --from=procps /usr/lib/ /usr/lib/
 COPY --from=sqlite3 /usr/bin/ /usr/bin/
 
 COPY --from=xdebug /usr/local/etc/php/ /usr/local/etc/php/
-COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/
 COPY --from=xdebug /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
+COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/
 
 COPY bin/install.sh /usr/local/bin/
 
@@ -87,8 +97,8 @@ ENTRYPOINT [ "docker-php-entrypoint" ]
 FROM wordpress:php${PHP_VERSION}-fpm-alpine AS fpm
 
 COPY --from=xdebug /usr/local/etc/php/ /usr/local/etc/php/
-COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/
 COPY --from=xdebug /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
+COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/
 
 FROM nginx:stable-alpine AS server
 
