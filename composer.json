@@ -24,6 +24,7 @@
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
         "wp-cli/wp-cli-bundle": "*",
+        "wpackagist-plugin/woocommerce": "*",
         "wpackagist-theme/storefront": "*"
     },
     "extra": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54d988e9f69d5596e6c80ed75e2a906f",
+    "content-hash": "4dc4db95f3208e3a21cd0a6cef5e4d36",
     "packages": [],
     "packages-dev": [
         {
@@ -9339,6 +9339,24 @@
                 "source": "https://github.com/wp-cli/wp-config-transformer/tree/v1.4.2"
             },
             "time": "2025-03-31T08:37:05+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce",
+            "version": "10.3.6",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce/",
+                "reference": "tags/10.3.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.10.3.6.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce/"
         },
         {
             "name": "wpackagist-theme/storefront",
