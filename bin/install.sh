@@ -35,6 +35,13 @@ wp language theme install pt_BR --all
 # Atualiza banco de dados para última versão de pacotes
 wp core update-db
 
+# Importa carga de demonstração do WooCommerce se ainda não possui produtos na base
+if [[ "0" == $(wp post list --post_type=product --format=count) ]]; then
+  wp plugin activate wordpress-importer
+  wp import ./public/packages/plugins/woocommerce/sample-data/sample_products.xml --authors=skip
+  wp plugin deactivate wordpress-importer
+fi
+
 if [ "1" == ${IS_TESTING:-0} ]; then
   sqlite3 public/packages/database/.ht.sqlite .dump > tests/Support/Data/dump.sql
 fi
