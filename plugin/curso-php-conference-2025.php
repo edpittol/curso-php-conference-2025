@@ -12,3 +12,12 @@
  * Text Domain: curso-php-conference-2025
  * Domain Path: /languages
  */
+
+use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
+use EdPittol\CursoPhpConference2025Plugin\DummyGateway\DummyGateway;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$pluginService = new PluginService();
+
+(new DummyGateway($pluginService));

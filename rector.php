@@ -6,6 +6,7 @@ use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/plugin/curso-php-conference-2025.php',
+        __DIR__ . '/plugin/src',
         __DIR__ . '/tests/EndToEnd',
     ])
     ->withPreparedSets(

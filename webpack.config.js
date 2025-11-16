@@ -27,6 +27,7 @@ const requestToHandle = (request) => {
 module.exports = {
 	...defaultConfig,
 	entry: {
+		'dummy/blocks': './plugin/src/DummyGateway/resource/js/dummy-gateway.js',
 	},
 	output: {
 		path: path.resolve( __dirname, 'plugin/assets/js' ),

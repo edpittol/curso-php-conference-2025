@@ -1,0 +1,17 @@
+{
+    "name": "edpittol/curso-php-conference-2025-plugin",
+    "description": "Plugin do curso PHP Conference 2025",
+    "version": "1.0.0",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Eduardo Pittol",
+            "email": "pittol@aztecweb.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EdPittol\\CursoPhpConference2025Plugin\\": "src/"
+        }
+    }
+}

@@ -7,6 +7,7 @@ mkdir -p ~/.docker_cache/{wp-cli,composer} .config/chromium public/packages/plug
 cp .env.example .env
 docker compose build
 docker compose run --rm -u $(id -u):$(id -g) php composer install
+docker compose run --rm -u $(id -u):$(id -g) -v $(pwd)/plugin:/app php composer install
 docker compose run --rm -u $(id -u):$(id -g) node npm install
 docker compose run --rm -u $(id -u):$(id -g) node npm run build
 docker compose run --rm -u $(id -u):$(id -g) installer
