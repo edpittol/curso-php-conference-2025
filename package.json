@@ -1,0 +1,23 @@
+{
+	"name": "curso-php-conference-2025",
+	"title": "Desenvolvendo conhecimento em programação PHP para WordPress.",
+	"version": "1.0.0",
+	"author": "Eduardo Pittol <pittol@aztecweb.net>",
+	"license": "GPL-2.0+",
+	"keywords": [],
+	"engines": {
+		"node": "^24.11.0",
+		"npm": "^11.6.0"
+	},
+	"devDependencies": {
+		"@woocommerce/dependency-extraction-webpack-plugin": "2.2.0",
+		"@wordpress/scripts": "^27.8.0",
+		"cross-env": "7.0.3"
+	},
+	"scripts": {
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"packages-update": "wp-scripts packages-update",
+		"check-engines": "wp-scripts check-engines"
+	}
+}

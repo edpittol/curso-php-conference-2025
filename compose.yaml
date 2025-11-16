@@ -65,3 +65,12 @@ services:
     extends:
       service: php
     entrypoint: [ "install.sh" ]
+
+  node:
+    image: node:lts-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ~/.docker_cache/npm:/.npm
+    environment:
+      - npm_config_cache=/.npm

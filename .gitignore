@@ -1,8 +1,12 @@
 # Composer
 vendor/
 
+# Node
+node_modules/
+
 # Projeto
 .env
+/plugin/assets/
 !tests/.env
 
 # WordPress
