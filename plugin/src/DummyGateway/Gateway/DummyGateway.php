@@ -18,29 +18,36 @@ class DummyGateway extends WC_Payment_Gateway
         $this->method_description = 'A dummy payment gateway for testing purposes.';
         $this->has_fields = true;
 
+        // Load the settings.
         $this->init_form_fields();
         $this->init_settings();
 
+        // Define user set variables.
         $this->title = 'Fake Payment';
         $this->description = 'Pay with this dummy gateway for testing.';
 
         // Actions.
-        add_filter('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
+        add_action('woocommerce_update_options_payment_gateways_' . $this->id, $this->handleAdminOptions(...));
+    }
+
+    public function handleAdminOptions(): void
+    {
+        $this->process_admin_options();
     }
 
     /**
      * @param int $order_id
-     * @return array{result:string, redirect:string}
+     * @return array{result: 'success'|'failure', redirect: string}
      */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName -- Ignore for WooCommerce compatibility
-    public function process_payment($order_id): array
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName
+    public function process_payment($order_id)
     {
         $order = wc_get_order($order_id);
 
-        if (\is_bool($order) || !is_a($order, WC_Order::class)) {
+        if (!$order instanceof WC_Order) {
             return [
-                'result' => 'failure',
-                'redirect' => '',
+                'result'   => 'failure',
+                'redirect' => wc_get_checkout_url(),
             ];
         }
 
