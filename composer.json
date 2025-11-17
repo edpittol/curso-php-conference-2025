@@ -21,6 +21,7 @@
     ],
     "require-dev": {
         "lucatume/wp-browser": "^4.5",
+        "rector/rector": "^2.2",
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
         "wp-cli/wp-cli-bundle": "*",
@@ -53,9 +54,11 @@
     },
     "scripts": {
         "qa": [
-            "phpcs"
+            "phpcs",
+            "rector --dry-run"
         ],
         "qa-fix": [
+            "rector",
             "phpcbf"
         ]
     }

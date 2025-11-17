@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\EndToEnd;
 
 use Tests\Support\EndToEndTester;
 
 class ActivationCest
 {
-    public function test_homepage_works(EndToEndTester $I): void
+    public function test_homepage_works(EndToEndTester $endToEndTester): void
     {
-        $I->amOnPage('/');
-        $I->seeElement('body');
+        $endToEndTester->amOnPage('/');
+        $endToEndTester->seeElement('body');
     }
     
-    public function test_can_login_as_admin(EndToEndTester $I): void
+    public function test_can_login_as_admin(EndToEndTester $endToEndTester): void
     {
-        $I->loginAsAdmin();
-        $I->amOnAdminPage('/');
-        $I->seeElement('body.wp-admin');
+        $endToEndTester->loginAsAdmin();
+        $endToEndTester->amOnAdminPage('/');
+        $endToEndTester->seeElement('body.wp-admin');
     }
 }

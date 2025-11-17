@@ -24,7 +24,9 @@ docker compose up -d server
 docker compose run --rm -u $(id -u):$(id -g) node npm run start
 ```
 
-## Testes
+## Qualidade
+
+### Testes
 
 Rodar a construção de desenvolvimento antes.
 
@@ -43,4 +45,10 @@ docker compose run --rm -u $(id -u):$(id -g) \
     -e DB_ENGINE=sqlite \
     -e HOME_URL=http://localhost:12483 \
     php vendor/bin/codecept run EndToEnd
+```
+
+### Rector
+
+```bash
+docker compose run --rm -u $(id -u):$(id -g) php vendor/bin/rector process
 ```

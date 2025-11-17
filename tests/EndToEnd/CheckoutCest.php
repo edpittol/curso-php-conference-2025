@@ -1,33 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\EndToEnd;
 
 use Tests\Support\EndToEndTester;
 
 class CheckoutCest
 {
-    public function testCheckout(EndToEndTester $I): void
+    public function testCheckout(EndToEndTester $endToEndTester): void
     {
-        $I->amOnPage('/produto/single/');
-        $I->click('.single_add_to_cart_button');
-        $I->waitForElement('.woocommerce-message');
+        $endToEndTester->amOnPage('/produto/single/');
+        $endToEndTester->click('.single_add_to_cart_button');
+        $endToEndTester->waitForElement('.woocommerce-message');
 
-        $I->amOnPage('/finalizar-compra/');
+        $endToEndTester->amOnPage('/finalizar-compra/');
 
-        $I->fillField('#email', 'joao@teste.com');
-        $I->selectOption('#billing-country', 'BR');
-        $I->fillField('#billing-first_name', 'João');
-        $I->fillField('#billing-last_name', 'Souza');
-        $I->fillField('#billing-address_1', 'Rua Epaminondas Jácome 123');
-        $I->fillField('#billing-city', 'Rio Branco');
-        $I->selectOption('#billing-state', 'AC');
-        $I->fillField('#billing-postcode', '69905-292');
-        $I->fillField('#billing-phone', '(68) 98456-1234');
+        $endToEndTester->fillField('#email', 'joao@teste.com');
+        $endToEndTester->selectOption('#billing-country', 'BR');
+        $endToEndTester->fillField('#billing-first_name', 'João');
+        $endToEndTester->fillField('#billing-last_name', 'Souza');
+        $endToEndTester->fillField('#billing-address_1', 'Rua Epaminondas Jácome 123');
+        $endToEndTester->fillField('#billing-city', 'Rio Branco');
+        $endToEndTester->selectOption('#billing-state', 'AC');
+        $endToEndTester->fillField('#billing-postcode', '69905-292');
+        $endToEndTester->fillField('#billing-phone', '(68) 98456-1234');
 
-        $I->waitForElementClickable('.wc-block-components-checkout-place-order-button');
-        $I->click('.wc-block-components-checkout-place-order-button');
+        $endToEndTester->waitForElementClickable('.wc-block-components-checkout-place-order-button');
+        $endToEndTester->click('.wc-block-components-checkout-place-order-button');
 
-        $I->waitForElement('.woocommerce-order');
-        $I->see('Pedido recebido', 'h1');
+        $endToEndTester->waitForElement('.woocommerce-order');
+        $endToEndTester->see('Pedido recebido', 'h1');
     }
 }
