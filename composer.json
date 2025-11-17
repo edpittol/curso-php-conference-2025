@@ -24,6 +24,7 @@
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
         "wp-cli/wp-cli-bundle": "*",
+        "wp-coding-standards/wpcs": "^3.2",
         "wpackagist-plugin/woocommerce": "*",
         "wpackagist-plugin/wordpress-importer": "*",
         "wpackagist-theme/storefront": "*"
@@ -42,11 +43,20 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
-            "roots/wordpress-core-installer": true
+            "roots/wordpress-core-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
             "php": "8.4"
         },
         "sort-packages": true
+    },
+    "scripts": {
+        "qa": [
+            "phpcs"
+        ],
+        "qa-fix": [
+            "phpcbf"
+        ]
     }
 }
