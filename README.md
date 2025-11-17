@@ -52,3 +52,9 @@ docker compose run --rm -u $(id -u):$(id -g) \
 ```bash
 docker compose run --rm -u $(id -u):$(id -g) php vendor/bin/rector process
 ```
+
+### PHPStan
+
+```bash
+docker compose run --rm -u $(id -u):$(id -g) php vendor/bin/phpstan --memory-limit=512G
+```

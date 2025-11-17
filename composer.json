@@ -21,9 +21,12 @@
     ],
     "require-dev": {
         "lucatume/wp-browser": "^4.5",
+        "php-stubs/woocommerce-stubs": "^10.3",
+        "phpstan/extension-installer": "^1.4",
         "rector/rector": "^2.2",
         "roots/wordpress-core-installer": "*",
         "roots/wordpress-no-content": "*",
+        "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-cli/wp-cli-bundle": "*",
         "wp-coding-standards/wpcs": "^3.2",
         "wpackagist-plugin/woocommerce": "*",
@@ -44,8 +47,9 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
-            "roots/wordpress-core-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "roots/wordpress-core-installer": true
         },
         "platform": {
             "php": "8.4"
@@ -55,7 +59,8 @@
     "scripts": {
         "qa": [
             "phpcs",
-            "rector --dry-run"
+            "rector --dry-run",
+            "phpstan --memory-limit=1G"
         ],
         "qa-fix": [
             "rector",
