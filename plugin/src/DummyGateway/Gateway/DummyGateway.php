@@ -18,11 +18,9 @@ class DummyGateway extends WC_Payment_Gateway
         $this->method_description = 'A dummy payment gateway for testing purposes.';
         $this->has_fields = true;
 
-        // Load the settings.
         $this->init_form_fields();
         $this->init_settings();
 
-        // Define user set variables.
         $this->title = 'Fake Payment';
         $this->description = 'Pay with this dummy gateway for testing.';
 

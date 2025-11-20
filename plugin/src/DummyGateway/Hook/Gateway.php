@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EdPittol\CursoPhpConference2025Plugin\DummyGateway\Hook;
 
+use Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry;
 use EdPittol\CursoPhpConference2025Plugin\DummyGateway\Gateway\DummyGateway;
 use EdPittol\CursoPhpConference2025Plugin\DummyGateway\Gateway\DummyGatewayBlocks;
-use Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry;
 
 class Gateway
 {
@@ -18,8 +18,8 @@ class Gateway
     }
 
     /**
-     * @param array<class-string> $methods
-     * @return array<class-string>
+     * @param array<int, class-string> $methods
+     * @return array<int, class-string>
      */
     public function initGateways(array $methods): array
     {
