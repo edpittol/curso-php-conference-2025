@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EdPittol\CursoPhpConference2025Plugin\DummyGateway\Gateway;
 
+use RuntimeException;
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
 class DummyGatewayBlocks extends AbstractPaymentMethodType
@@ -12,24 +13,38 @@ class DummyGatewayBlocks extends AbstractPaymentMethodType
 
     public function initialize(): void
     {
-        $this->settings = get_option('woocommerce_dummy_gateway_settings', []);
+        $settings = get_option('woocommerce_dummy_gateway_settings', []);
+        if (!is_array($settings)) {
+            throw new RuntimeException('Invalid settings for Dummy Gateway Blocks.');
+        }
+
+        $this->settings = $settings;
     }
 
-    public function is_active()
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName -- Ignore for WooCommerce compatibility
+    public function is_active(): bool
     {
         return ( $this->settings['enabled'] ?? 'no' ) === 'yes';
     }
 
-    public function get_payment_method_script_handles()
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName -- Ignore for WooCommerce compatibility
+    public function get_payment_method_script_handles(): array
     {
         return [ 'dummy-gateway-blocks-script' ];
     }
 
-    public function get_payment_method_data()
+    /**
+     * @return array<string, string>
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName -- Ignore for WooCommerce compatibility
+    public function get_payment_method_data(): array
     {
+        assert(\is_string($this->settings['title']));
+        assert(\is_string($this->settings['description']));
+
         return [
-            'title'       => 'Dummy Payment',
-            'description' => 'Test transactions using the dummy gateway.',
+            'title'       => $this->settings['title'],
+            'description' => $this->settings['description'],
         ];
     }
 }
