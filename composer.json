@@ -20,7 +20,9 @@
         }
     ],
     "require-dev": {
+        "brain/monkey": "^2.6",
         "lucatume/wp-browser": "^4.5",
+        "mikey179/vfsstream": "^1.6",
         "php-stubs/woocommerce-stubs": "^10.3",
         "phpstan/extension-installer": "^1.4",
         "rector/rector": "^2.2",
@@ -32,6 +34,11 @@
         "wpackagist-plugin/woocommerce": "*",
         "wpackagist-plugin/wordpress-importer": "*",
         "wpackagist-theme/storefront": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "EdPittol\\CursoPhpConference2025Plugin\\": "plugin/src/"
+        }
     },
     "extra": {
         "wordpress-install-dir": "public/wp",
@@ -60,7 +67,7 @@
         "qa": [
             "phpcs",
             "rector --dry-run",
-            "phpstan --memory-limit=1G"
+            "phpstan --memory-limit=512G"
         ],
         "qa-fix": [
             "rector",
