@@ -36,4 +36,9 @@ class PluginService
             $this->url() . $path
         );
     }
+
+    public function slug(): string
+    {
+        return 'curso-php-conference-2025';
+    }
 }
