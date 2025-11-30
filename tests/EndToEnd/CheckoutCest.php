@@ -17,6 +17,7 @@ class CheckoutCest
         $endToEndTester->amOnPage('/finalizar-compra/');
 
         $endToEndTester->fillField('#email', 'joao@teste.com');
+        $endToEndTester->fillField('#contact-curso-php-conference-2025-cpf', '111.111.111-11');
         $endToEndTester->selectOption('#billing-country', 'BR');
         $endToEndTester->fillField('#billing-first_name', 'João');
         $endToEndTester->fillField('#billing-last_name', 'Souza');

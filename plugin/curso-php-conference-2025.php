@@ -13,7 +13,12 @@
  * Domain Path: /languages
  */
 
+declare(strict_types=1);
+
+namespace EdPittol\CursoPhpConference2025Plugin;
+
 use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
+use EdPittol\CursoPhpConference2025Plugin\BrazilianCheckout\BrazilianCheckout;
 use EdPittol\CursoPhpConference2025Plugin\DummyGateway\DummyGateway;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -21,3 +26,4 @@ require_once __DIR__ . '/vendor/autoload.php';
 $pluginService = new PluginService();
 
 (new DummyGateway($pluginService));
+(new BrazilianCheckout($pluginService));
