@@ -49,6 +49,8 @@ class DummyGateway extends WC_Payment_Gateway
             ];
         }
 
+        do_action('dummy_gateway_process_payment', $order);
+
         $order->update_status('completed', 'Done by Dummy Gateway.');
 
         wc_reduce_stock_levels($order_id);

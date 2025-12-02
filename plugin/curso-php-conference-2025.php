@@ -17,13 +17,27 @@ declare(strict_types=1);
 
 namespace EdPittol\CursoPhpConference2025Plugin;
 
+use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\AsaasClient;
 use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
 use EdPittol\CursoPhpConference2025Plugin\BrazilianCheckout\BrazilianCheckout;
+use EdPittol\CursoPhpConference2025Plugin\Customer\Customer;
+use EdPittol\CursoPhpConference2025Plugin\Customer\Service\CustomerOrderService;
 use EdPittol\CursoPhpConference2025Plugin\DummyGateway\DummyGateway;
+use WP_Http;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $pluginService = new PluginService();
 
-(new DummyGateway($pluginService));
+$httpClient = new WP_Http();
+
+assert(isset($_ENV['ASAAS_API_KEY']) && \is_string($_ENV['ASAAS_API_KEY']));
+$apiKey = sanitize_text_field(wp_unslash($_ENV['ASAAS_API_KEY']));
+
+$asaasClient = new AsaasClient($httpClient, $apiKey);
+
+$customerOrderService = new CustomerOrderService($asaasClient);
+
 (new BrazilianCheckout($pluginService));
+(new Customer($customerOrderService));
+(new DummyGateway($pluginService));
