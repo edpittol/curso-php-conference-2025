@@ -27,6 +27,7 @@ const requestToHandle = (request) => {
 module.exports = {
 	...defaultConfig,
 	entry: {
+		'boleto/blocks': './plugin/src/BoletoGateway/resource/js/boleto-gateway.js',
 		'dummy/blocks': './plugin/src/DummyGateway/resource/js/dummy-gateway.js'
 	},
 	output: {

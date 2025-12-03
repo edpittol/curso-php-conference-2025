@@ -10,7 +10,7 @@ class CheckoutCest
 {
     public function testCheckout(EndToEndTester $endToEndTester): void
     {
-        $endToEndTester->amOnPage('/produto/single/');
+        $endToEndTester->amOnPage('/produto/album/');
         $endToEndTester->click('.single_add_to_cart_button');
         $endToEndTester->waitForElement('.woocommerce-message');
 
@@ -28,10 +28,15 @@ class CheckoutCest
         $endToEndTester->fillField('#billing-postcode', '69905-292');
         $endToEndTester->fillField('#billing-phone', '(68) 98456-1234');
 
+        $endToEndTester->scrollTo('.wc-block-checkout__payment-method');
+        $endToEndTester->makeScreenshot('before-selecting-payment-method');
+
+        $endToEndTester->click('#radio-control-wc-payment-method-options-boleto_gateway');
+
         $endToEndTester->waitForElementClickable('.wc-block-components-checkout-place-order-button');
         $endToEndTester->click('.wc-block-components-checkout-place-order-button');
 
-        $endToEndTester->waitForElement('.woocommerce-order');
+        $endToEndTester->waitForElement('.woocommerce-order', 600);
         $endToEndTester->see('Pedido recebido', 'h1');
     }
 }

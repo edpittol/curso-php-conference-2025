@@ -11,7 +11,7 @@ class ProcessPayment
 {
     public function __construct(private readonly CustomerOrderService $customerOrderService)
     {
-        add_action('dummy_gateway_process_payment', $this->storeAsaasCustomerIdInOrder(...));
+        add_action('asaas_before_process_payment', $this->storeAsaasCustomerIdInOrder(...));
     }
 
     public function storeAsaasCustomerIdInOrder(WC_Order $wcOrder): void

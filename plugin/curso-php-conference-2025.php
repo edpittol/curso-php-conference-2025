@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace EdPittol\CursoPhpConference2025Plugin;
 
+use EdPittol\CursoPhpConference2025Plugin\BoletoGateway\BoletoGateway;
 use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\AsaasClient;
 use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
 use EdPittol\CursoPhpConference2025Plugin\BrazilianCheckout\BrazilianCheckout;
@@ -38,6 +39,7 @@ $asaasClient = new AsaasClient($httpClient, $apiKey);
 
 $customerOrderService = new CustomerOrderService($asaasClient);
 
+(new BoletoGateway($pluginService, $asaasClient));
 (new BrazilianCheckout($pluginService));
 (new Customer($customerOrderService));
 (new DummyGateway($pluginService));
