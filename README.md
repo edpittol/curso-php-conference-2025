@@ -3,7 +3,10 @@
 ## Instalação
 
 ```bash
-mkdir -p ~/.docker_cache/{wp-cli,composer} .config/chromium public/packages/plugins/curso-php-conference-2025
+WWW_DATA_DIRS=(public/packages/uploads)
+mkdir -p ~/.docker_cache/{wp-cli,composer} .config/chromium public/packages/plugins/curso-php-conference-2025 ${WWW_DATA_DIRS[@]}
+sudo setfacl -R -m u:82:rwx ${WWW_DATA_DIRS[@]} && sudo setfacl -Rd -m u:82:rwx ${WWW_DATA_DIRS[@]}
+sudo setfacl -R -m u:${USER}:rwx ${WWW_DATA_DIRS[@]} && sudo setfacl -Rd -m u:${USER}:rwx ${WWW_DATA_DIRS[@]}
 cp .env.example .env
 docker compose build
 docker compose run --rm -u $(id -u):$(id -g) php composer install

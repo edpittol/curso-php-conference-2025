@@ -19,6 +19,7 @@ namespace EdPittol\CursoPhpConference2025Plugin;
 
 use EdPittol\CursoPhpConference2025Plugin\BoletoGateway\BoletoGateway;
 use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\AsaasClient;
+use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\Logger\AsaasClientLogger;
 use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
 use EdPittol\CursoPhpConference2025Plugin\BrazilianCheckout\BrazilianCheckout;
 use EdPittol\CursoPhpConference2025Plugin\Customer\Customer;
@@ -30,16 +31,20 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $pluginService = new PluginService();
 
-$httpClient = new WP_Http();
+new BrazilianCheckout($pluginService);
+new DummyGateway($pluginService);
 
-assert(isset($_ENV['ASAAS_API_KEY']) && \is_string($_ENV['ASAAS_API_KEY']));
-$apiKey = sanitize_text_field(wp_unslash($_ENV['ASAAS_API_KEY']));
+\add_action('plugins_loaded', static function () use ($pluginService): void {
+    $httpClient = new WP_Http();
 
-$asaasClient = new AsaasClient($httpClient, $apiKey);
+    assert(isset($_ENV['ASAAS_API_KEY']) && \is_string($_ENV['ASAAS_API_KEY']));
+    $apiKey = \sanitize_text_field(\wp_unslash($_ENV['ASAAS_API_KEY']));
 
-$customerOrderService = new CustomerOrderService($asaasClient);
+    $logger = new AsaasClientLogger(\wc_get_logger());
 
-(new BoletoGateway($pluginService, $asaasClient));
-(new BrazilianCheckout($pluginService));
-(new Customer($customerOrderService));
-(new DummyGateway($pluginService));
+    $asaasClient = new AsaasClient($httpClient, $apiKey, $logger);
+    $customerOrderService = new CustomerOrderService($asaasClient);
+
+    new Customer($customerOrderService);
+    new BoletoGateway($pluginService, $asaasClient);
+});

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient;
 
 use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\Exception\AsaasClientRequestException;
+use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\Logger\AsaasClientLogger;
 use Exception;
 use WP_Error;
 use WP_Http;
@@ -15,7 +16,8 @@ class AsaasClient
 {
     public function __construct(
         private readonly WP_Http $wpHttp,
-        private readonly string $apiKey
+        private readonly string $apiKey,
+        private readonly ?AsaasClientLogger $asaasClientLogger = null
     ) {
     }
 
@@ -72,9 +74,22 @@ class AsaasClient
             'Content-Type'  => 'application/json',
         ];
 
+        $this->asaasClientLogger?->info(sprintf('Requesting %s %s', $method, $url), [
+            'body' => $args['body'] ?? null,
+        ]);
+
         $response = $this->wpHttp->request($url, array_merge($args, [
             'method' => $method,
         ]));
+
+        if (is_wp_error($response)) {
+            $this->asaasClientLogger?->error('Request failed', ['error' => $response->get_error_message()]);
+        } else {
+            $this->asaasClientLogger?->info('Response received', [
+                'status' => $response['response']['code'],
+                'body' => $response['body'],
+            ]);
+        }
 
         return $this->extractResponseObject($response);
     }
