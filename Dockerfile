@@ -58,6 +58,8 @@ RUN { \
 
 FROM wordpress:cli-php${PHP_VERSION} AS php
 
+USER root
+
 COPY --from=chromium /etc/alsa/ /etc/alsa/
 COPY --from=chromium /etc/chromium/ /etc/chromium/
 COPY --from=chromium /etc/fonts/ /etc/fonts/
@@ -85,6 +87,12 @@ COPY --from=sqlite3 /usr/bin/ /usr/bin/
 COPY --from=xdebug /usr/local/etc/php/ /usr/local/etc/php/
 COPY --from=xdebug /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
 COPY --from=xdebug /usr/local/lib/php/ /usr/local/lib/php/
+
+RUN export GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc && \
+	export GLIBC_VERSION=2.30-r0 && \
+	curl -sSL ${GLIBC_REPO}/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -o /tmp/glibc.apk && \
+	curl -sSL ${GLIBC_REPO}/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -o /tmp/glibc-bin.apk && \
+	apk add --allow-untrusted --force-overwrite /tmp/*.apk
 
 COPY bin/install.sh /usr/local/bin/
 
