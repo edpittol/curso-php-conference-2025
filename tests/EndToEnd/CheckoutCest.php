@@ -28,15 +28,19 @@ class CheckoutCest
         $endToEndTester->fillField('#billing-postcode', '69905-292');
         $endToEndTester->fillField('#billing-phone', '(68) 98456-1234');
 
-        $endToEndTester->scrollTo('.wc-block-checkout__payment-method');
-        $endToEndTester->makeScreenshot('before-selecting-payment-method');
-
         $endToEndTester->click('#radio-control-wc-payment-method-options-boleto_gateway');
 
         $endToEndTester->waitForElementClickable('.wc-block-components-checkout-place-order-button');
         $endToEndTester->click('.wc-block-components-checkout-place-order-button');
 
-        $endToEndTester->waitForElement('.woocommerce-order', 600);
+        $endToEndTester->waitForElement('.woocommerce-order');
         $endToEndTester->see('Pedido recebido', 'h1');
+
+        $bankSlipLink = $endToEndTester->grabFromDatabase('wp_wc_orders_meta', 'meta_value', [
+            'order_id' => 58,
+            'meta_key' => '_asaas_bank_slip_url',
+        ]);
+
+        $endToEndTester->seeLink('Ver Boleto', $bankSlipLink);
     }
 }

@@ -6,7 +6,7 @@ namespace EdPittol\CursoPhpConference2025Plugin\Payment\Data;
 
 use DateTimeImmutable;
 
-readonly class ApiPayment extends Payment
+abstract readonly class ApiPayment extends Payment
 {
     public function __construct(
         string $customer,

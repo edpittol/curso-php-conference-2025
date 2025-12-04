@@ -6,6 +6,7 @@ namespace EdPittol\CursoPhpConference2025Plugin\BoletoGateway;
 
 use EdPittol\CursoPhpConference2025Plugin\BoletoGateway\Hook\Assets;
 use EdPittol\CursoPhpConference2025Plugin\BoletoGateway\Hook\Gateway;
+use EdPittol\CursoPhpConference2025Plugin\BoletoGateway\Hook\ProcessPayment;
 use EdPittol\CursoPhpConference2025Plugin\Common\AsaasClient\AsaasClient;
 use EdPittol\CursoPhpConference2025Plugin\Core\Service\PluginService;
 
@@ -17,5 +18,6 @@ class BoletoGateway
     ) {
         (new Assets($this->pluginService));
         (new Gateway($this->asaasClient));
+        (new ProcessPayment());
     }
 }

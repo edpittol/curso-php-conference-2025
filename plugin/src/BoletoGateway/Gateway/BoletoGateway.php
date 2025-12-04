@@ -12,7 +12,9 @@ class BoletoGateway extends AsaasGateway
 {
     public $id = self::GATEWAY_ID;
 
-    public const GATEWAY_ID = 'boleto_gateway';
+    public const string GATEWAY_ID = 'boleto_gateway';
+
+    public const string BILLING_TYPE = 'BOLETO';
 
     public function __construct(AsaasClient $asaasClient)
     {
@@ -27,7 +29,7 @@ class BoletoGateway extends AsaasGateway
 
     protected function billingType(): string
     {
-        return 'BOLETO';
+        return self::BILLING_TYPE;
     }
 
     protected function dueDate(): DateTimeImmutable

@@ -17,8 +17,9 @@ use WC_Payment_Gateway;
 
 abstract class AsaasGateway extends WC_Payment_Gateway
 {
-    public function __construct(protected AsaasClient $asaasClient)
-    {
+    public function __construct(
+        protected AsaasClient $asaasClient
+    ) {
     }
 
     abstract protected function billingType(): string;
@@ -48,7 +49,9 @@ abstract class AsaasGateway extends WC_Payment_Gateway
         $this->maybeReduceStock($order);
         $this->emptyCart();
 
-        do_action('asaas_after_process_payment', $order);
+        do_action('asaas_after_process_payment', $order, $apiPayment);
+
+        $order->save();
 
         return [
             'result' => 'success',
