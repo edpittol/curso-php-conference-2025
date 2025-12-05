@@ -13,6 +13,7 @@ abstract readonly class ApiPayment extends Payment
         string $billingType,
         float $value,
         DateTimeImmutable $dueDate,
+        public string $apiId,
         public string $status
     ) {
         parent::__construct($customer, $billingType, $value, $dueDate);

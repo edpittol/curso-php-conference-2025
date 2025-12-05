@@ -15,8 +15,9 @@ final readonly class ApiBoletoPayment extends ApiPayment
         float $value,
         DateTimeImmutable $dueDate,
         string $status,
+        string $apiId,
         public string $bankSlipUrl
     ) {
-        parent::__construct($customer, $billingType, $value, $dueDate, $status);
+        parent::__construct($customer, $billingType, $value, $dueDate, $apiId, $status);
     }
 }

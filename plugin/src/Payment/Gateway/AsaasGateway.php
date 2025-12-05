@@ -11,6 +11,7 @@ use EdPittol\CursoPhpConference2025Plugin\Payment\Api\Endpoint\PaymentEndpoint;
 use EdPittol\CursoPhpConference2025Plugin\Payment\Data\ApiPayment;
 use EdPittol\CursoPhpConference2025Plugin\Payment\Data\Payment;
 use EdPittol\CursoPhpConference2025Plugin\Payment\Mapper\AsaasStatusToWcStatusMapper;
+use EdPittol\CursoPhpConference2025Plugin\Payment\Repository\PaymentOrderMetaRepository;
 use EdPittol\CursoPhpConference2025Plugin\Payment\Service\PaymentApiService;
 use WC_Order;
 use WC_Payment_Gateway;
@@ -48,6 +49,8 @@ abstract class AsaasGateway extends WC_Payment_Gateway
         $this->updateOrderStatus($order, $apiPayment);
         $this->maybeReduceStock($order);
         $this->emptyCart();
+
+        (new PaymentOrderMetaRepository())->persist($order, $apiPayment->apiId);
 
         do_action('asaas_after_process_payment', $order, $apiPayment);
 

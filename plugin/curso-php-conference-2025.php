@@ -25,6 +25,7 @@ use EdPittol\CursoPhpConference2025Plugin\BrazilianCheckout\BrazilianCheckout;
 use EdPittol\CursoPhpConference2025Plugin\Customer\Customer;
 use EdPittol\CursoPhpConference2025Plugin\Customer\Service\CustomerOrderService;
 use EdPittol\CursoPhpConference2025Plugin\DummyGateway\DummyGateway;
+use EdPittol\CursoPhpConference2025Plugin\Webhook\Webhook;
 use WP_Http;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -33,6 +34,7 @@ $pluginService = new PluginService();
 
 new BrazilianCheckout($pluginService);
 new DummyGateway($pluginService);
+new Webhook($pluginService);
 
 \add_action('plugins_loaded', static function () use ($pluginService): void {
     $httpClient = new WP_Http();

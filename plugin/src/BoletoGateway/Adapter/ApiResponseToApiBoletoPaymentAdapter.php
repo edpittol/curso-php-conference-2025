@@ -24,6 +24,7 @@ class ApiResponseToApiBoletoPaymentAdapter implements ApiResponseToApiPaymentAda
             value: (float) $apiResponse['value'],
             dueDate: new DateTimeImmutable($apiResponse['dueDate']),
             status: $apiResponse['status'],
+            apiId: $apiResponse['id'],
             bankSlipUrl: $apiResponse['bankSlipUrl'],
         );
     }
