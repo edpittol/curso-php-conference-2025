@@ -1,0 +1,29 @@
+actor: ApiTester
+bootstrap: _bootstrap.php
+modules:
+    enabled:
+        - REST:
+            depends: lucatume\WPBrowser\Module\WPBrowser
+            url: &url '%WORDPRESS_URL%'
+        - lucatume\WPBrowser\Module\WPBrowser
+        - lucatume\WPBrowser\Module\WPDb
+    config:
+        lucatume\WPBrowser\Module\WPBrowser:
+            url: '%WORDPRESS_URL%'
+            adminUsername: '%WORDPRESS_ADMIN_USER%'
+            adminPassword: '%WORDPRESS_ADMIN_PASSWORD%'
+            adminPath: '%WORDPRESS_ADMIN_PATH%'
+            headers:
+                X_WPBROWSER_REQUEST: 1
+                X_TEST_REQUEST: 1
+                X_APM_REQUEST: 1
+                Content-Type: application/json
+        lucatume\WPBrowser\Module\WPDb:
+            dbUrl: '%WORDPRESS_DB_URL%'
+            dump: 'tests/Support/Data/dump.sql'
+            populate: true
+            cleanup: true
+            reconnect: false
+            url: '%WORDPRESS_URL%'
+            urlReplacement: false
+            tablePrefix: '%WORDPRESS_TABLE_PREFIX%'
