@@ -23,6 +23,7 @@ class WebhookEndpoint
         register_rest_route($this->pluginService->slug() . '/v1', '/webhook', [
             'methods' => 'POST',
             'callback' => $this->processWebhook(...),
+            'permission_callback' => '__return_true',
         ]);
     }
 
