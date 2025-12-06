@@ -11,6 +11,13 @@
     ],
     "repositories": [
         {
+            "type": "path",
+            "url": "plugin",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://wpackagist.org",
             "only": [
@@ -22,6 +29,7 @@
     "require-dev": {
         "brain/monkey": "^2.6",
         "codeception/module-rest": "^3.4",
+        "edpittol/curso-php-conference-2025-plugin": "@dev",
         "lucatume/wp-browser": "^4.5",
         "mikey179/vfsstream": "^1.6",
         "php-stubs/woocommerce-stubs": "^10.3",

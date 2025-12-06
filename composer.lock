@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de6a287c516b6e4882bbc8217880a7d0",
+    "content-hash": "a653cec2fc644f8814b096d519b003bd",
     "packages": [],
     "packages-dev": [
         {
@@ -1911,6 +1911,32 @@
                 "source": "https://github.com/druidfi/mysqldump-php/tree/1.1.0"
             },
             "time": "2024-03-03T10:20:17+00:00"
+        },
+        {
+            "name": "edpittol/curso-php-conference-2025-plugin",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "plugin",
+                "reference": "3f700e220c01f3190b3338f4b48b4284f2f2050d"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "EdPittol\\CursoPhpConference2025Plugin\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Eduardo Pittol",
+                    "email": "pittol@aztecweb.net"
+                }
+            ],
+            "description": "Plugin do curso PHP Conference 2025",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "eftec/bladeone",
@@ -10614,11 +10640,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "edpittol/curso-php-conference-2025-plugin": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.4"
     },
